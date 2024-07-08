@@ -1,0 +1,22 @@
+{% extends "common/base2.html" %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title d-flex justify-content-between align-items-start">
+                <h2>View Information:</h2>
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Back</a>
+            </div>
+            <div class="table-responsive">
+                <h5 class="card-title">{{viewFoodVar.food_name}}</h5>
+                <img src="/{{viewFoodVar.image}}" width="300px" style="border-radius: 8px; margin-bottom: 10px;">
+                <p class="card-text"><strong>Calories: </strong>{{viewFoodVar.calories}}cal</p>
+                <p class="card-text"><strong>Category: </strong>{{viewFoodVar.category}}</p>
+                <p class="card-text"><strong>Description: </strong>{{viewFoodVar.description}}</p>
+                <p class="card-text"><strong>Price: </strong>${{viewFoodVar.price}}</p>
+                <p class="card-text"><strong>Quantity: </strong>{{viewFoodVar.quantity}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

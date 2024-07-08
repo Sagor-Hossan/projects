@@ -1,0 +1,44 @@
+{% extends "common/base.html" %}
+{% block content %}
+
+ <div class="login-form-bg">
+    <div class="py-5">
+       <div class="row justify-content-center h-100">
+          <div class="col-xl-6">
+             <div class="form-input-content px-3">
+                <div class="card login-form mb-0">
+                   <div class="card-body">
+                      
+                       <h3 class="text-center">Update Food</h3>
+                       <form class="mt-2 mb-2 login-input" method='post' enctype="multipart/form-data">
+                           {% csrf_token %}
+                           <div class="form-group">
+                               <label class="mr-sm-2">Food Name</label>
+                               <input type="text" class="form-control" name='food_name' value='{{food.food_name}}'  placeholder="Enter a food name" >
+                               {% comment %} <input type="hidden" class="form-control" name='id' value='{{food.id}}'> {% endcomment %}
+                           </div>
+                           <div class="form-group">
+                               <label class="mr-sm-2">Food's Calorie</label>
+                               <input type="text" class="form-control" name='calories' value='{{food.calories}}'  placeholder="Enter your foods calorie" >
+                           </div>                     
+                         
+                         <div class="form-group">
+                            <label class="mr-sm-2">Food Picture</label>
+                            <input type="file" name='image' class="form-control-file">
+                            <input type="hidden" name='image1' value='{{food.image.url}}' class="form-control-file">
+                         </div>
+                        
+                         <button class="btn login-form__btn submit w-100">Update</button>
+                      </form>
+                      
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ </div>
+
+
+{% endblock content %}

@@ -1,0 +1,79 @@
+{% extends "common/base.html" %}
+{% block content %}
+{% load static %}
+<div class="container-fluid mt-3">
+
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-1">
+                <div class="card-body">
+                    <h3 class="card-title text-white"> Todays BMR</h3>
+                    <div class="d-inline-block">
+                        <div class="d-flex">
+                            <img src="{% static 'images/bmr.png' %}" style="height: 35px; width: 45px; object-fit: cover; border-radius: 10px; margin-right: 5px;">
+                            <h3 class="text-white"> {{ bmr|floatformat:2 }}</h3>
+                        </div>
+                        {% comment %} <p class="text-white mb-0">Jan - March 2019</p> {% endcomment %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-2">
+                <div class="card-body">
+                    <h3 class="card-title text-white">Todays Calories</h3>
+                    <div class="d-inline-block">
+                        <div class="d-flex align-items-center">
+                            <img src="{% static 'images/cal.jpeg' %}" style="height: 35px; width: 35px; object-fit: cover; border-radius: 10px; margin-right: 10px;">
+                            <h3 class="text-white"> {{ calSum|floatformat:2 }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div> 
+
+
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title d-flex justify-content-between align-items-start">
+                <h4>My Todays Consumed Foods</h4>
+                <a href="{% url 'addConsumedCalories' %}" class="btn btn-primary">Add Food</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Calorie</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in consumed %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{i.item_name}}</td>
+                            <td><span class="badge badge-primary fs-1 px-2">{{i.calorie_consumed}}</span></td>
+                            <td>{{i.time}}</td>
+                            <td class="color-primary">
+                                <a href="{% url 'deleteConsumedCalories' i.id %}"  class='btn btn-danger'>
+                                    <i class="icon-trash pr-2"></i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

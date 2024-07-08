@@ -1,0 +1,17 @@
+<table border="1">
+    <tr><th>Name</th>
+        <th>Skills</th></tr>
+            
+            {% for i in applicant %}
+                
+        <tr>
+                
+            <td> {{i.applied_by.username}} </td>
+            <td> {{i.skills}} </td>
+        </tr>
+
+            {% endfor %}
+
+
+
+</table>

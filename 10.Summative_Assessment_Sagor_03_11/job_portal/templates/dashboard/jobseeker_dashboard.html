@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "messages.html" %}
+<style>
+    .text_ellipsis {
+        margin: 0; /* Remove default margin */
+        overflow: hidden; /* Ensure content doesn't overflow */
+        text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+</style>
+
+<div class="bg-blue-900 text-white py-32 px-16">
+    <div class="container mx-auto flex flex-col items-center justify-center text-center">
+        
+        {% if not request.user.is_authenticated or  request.user.is_authenticated and request.user.user_type == 'Jobseeker' %}
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Find Your Dream Job</h1>
+        <p class="text-lg sm:text-xl md:text-2xl mb-8">Search through thousands of job listings and land your next career opportunity.</p>
+            
+        <form action="{% url 'searchJob' %}" method='GET'>
+            <div class="flex gap-0.5">
+                <input type="text" name="search_job" class="w-3/4 px-4 py-2 text-green-900 rounded-l-lg focus:outline-none" placeholder="Search Jobs">
+                <input type="text" name="search_location" class="w-3/4 px-4 py-2 text-green-900  focus:outline-none" placeholder="Location">
+                <button type='submit' class="bg-white text-blue-900 px-6 py-2 rounded-r-lg hover:bg-blue-200 focus:outline-none">Search</button>
+            </div>
+        </form> 
+        {% else %}
+        <h1 class="text-4xl sm:text-3xl md:text-5xl font-bold mb-4">Find Seeker For Your Company </h1>
+        <p class="text-lg sm:text-xl md:text-2xl mb-8">Search through thousands of job listings and land your next career opportunity.</p>
+        {% endif %}
+            
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container mx-auto p-8">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-semibold text-gray-800">Job Portal Dashboard</h1>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Job Card Example -->
+        
+        {% for i in jobs %}
+        
+        <div class="rounded overflow-hidden shadow-lg flex flex-col">
+            <div class="relative"><a href="{% url 'job_detail' i.id %}">
+                    <img class="w-full h-52 object-cover object-center"
+                        src="{{ i.company_logo.url }}"
+                        alt="Sunset in the mountains">
+                    <div
+                        class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
+                    </div>
+                </a>
+                <a href="{% url 'job_detail' i.id %}">
+                    <div
+                        class="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+                        {{i.deadline}}
+                    </div>
+                </a>
+            </div>
+            <div class="px-6 py-4 mb-auto">
+                <a href="{% url 'job_detail' i.id %}"
+                    class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">{{i.job_title}}</a>
+                <p class="text-gray-500 text-sm text_ellipsis">
+                    {{i.job_description}}
+                </p>
+            </div>     
+            
+        </div>
+
+        {% endfor %}
+
+        <!-- Repeat the above job card structure for each job -->
+    </div>
+    
+
+    
+
+    {% if not request.user.is_authenticated  %}
+        {% if counts > 8 %}
+            <div class="flex items-center justify-center py-10">
+                <a href="{% url 'job_list' %}" class="text-gray-600 hover:text-gray-800 border p-2 rounded">See More</a>
+            </div>  
+        {% endif %}
+        
+    {% elif request.user.is_authenticated %}
+        {% if request.user.user_type == 'Jobseeker' %}
+            {% if counts > 8 %}
+                <div class="flex items-center justify-center py-10">
+                    <a href="{% url 'job_list' %}" class="text-gray-600 hover:text-gray-800 border p-2 rounded">See More</a>
+                </div>  
+            {% endif %}
+        {% elif request.user.user_type == 'Recruiter' %}
+            {% if counts > 4 %}
+                <div class="flex items-center justify-center py-10">
+                    <a href="{% url 'job_list' %}" class="text-gray-600 hover:text-gray-800 border p-2 rounded">See More</a>
+                </div> 
+            {% endif %} 
+        {% endif %}
+    {% endif %} 
+    
+
+</div>
+{% endblock content %}

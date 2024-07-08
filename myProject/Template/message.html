@@ -1,0 +1,17 @@
+
+{% if messages %}
+    
+    {% for i in messages %}
+        
+        {% if i.tage == 'success' %}
+
+            <h1>{{i}}</h1>
+            
+        {% endif %}
+            
+        
+    {% endfor %}
+        
+    
+{% endif %}
+    

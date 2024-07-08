@@ -1,0 +1,27 @@
+
+<ul>
+    <li><a href="{% url 'dashboard' %}">Home</a></li>
+    
+    {% if user.role == 'recruiter' %}
+    <li><a href="{% url 'addjob' %}">Addjob</a></li>
+    <li><a href="{% url 'joblistforall' %}">Job List</a></li>
+    <li><a href="{% url 'resumeprofile' %}">Profile</a></li>
+    <li style="float:right"><a class="active" href="{% url 'signout' %}">Log Out</a></li>
+
+
+
+
+    {% elif user.role == 'job_seeker' %}
+    <li><a href="{% url 'joblistforall' %}">Job List</a></li>
+    <li><a href="{% url 'resumeprofile' %}">Profile</a></li>
+
+
+    {% elif user.role != 'recruiter' or user.role != 'job_seeker' %}
+
+    <li><a href="{% url 'signup' %}">Sign In</a></li>
+    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+    <li style="float:right"><a class="active" href="{% url 'signout' %}">Log Out</a></li>
+    {% endif %}
+
+  </ul>
+  

@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Form</title>
+</head>
+<body>
+  <form action="{% url 'addjob' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="company_title">Company Title:</label>
+    <input type="text" name="job_title" id="company_title"><br><br>
+
+    <label for="company_description">Company Description:</label>
+    <input type="text" name="company_description" id="company_description"><br><br>
+
+    <label for="company_logo">Company Logo:</label>
+    <input type="file" name="company_logo" id="company_logo"><br><br>
+
+    <label for="company_name">Company Name:</label>
+    <input type="text" name="company_name" id="company_name"><br><br>
+
+    <label for="company_location">Company Location:</label>
+    <input type="text" name="company_location" id="company_location"><br><br>
+
+    <label for="qualification">Qualification:</label>
+    <input type="text" name="qualification" id="qualification"><br><br>
+
+    <label for="deadline">Deadline:</label>
+    <input type="text" name="deadline" id="deadline"><br><br>
+
+    <label for="salary">Salary:</label>
+    <input type="text" name="salary" id="salary"><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
+
+{% endblock content %}
+    

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<title>Job list</title>
+<style>
+    .text_ellipsis {
+        margin: 0; /* Remove default margin */
+        overflow: hidden; /* Ensure content doesn't overflow */
+        text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+</style>
+<div class="text-center p-10">
+    <h1 class="font-bold text-4xl mb-4">All categories jobs are avilable here </h1>
+    <h1 class="text-3xl">Find your job</h1>
+</div>
+
+<div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+
+    
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        
+        {% for i in jobs %} 
+        <div class="rounded overflow-hidden shadow-lg flex flex-col">
+            <div class="relative"><a href="{% url 'job_detail' i.id %}">
+                    <img class="w-full h-52 object-cover object-center"
+                        src="{{ i.company_logo.url }}"
+                        alt="Sunset in the mountains">
+                    <div
+                        class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
+                    </div>
+                </a>
+                <a href="{% url 'job_detail' i.id %}">
+                    <div
+                        class="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+                        {{i.deadline}}
+                    </div>
+                </a>
+            </div>
+            <div class="px-6 py-4 mb-auto">
+                <a href="{% url 'job_detail' i.id %}"
+                    class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">{{i.job_title}}</a>
+                <p class="text-gray-500 text-sm text_ellipsis">
+                    {{i.job_description}}
+                </p>
+            </div>
+            
+            <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
+                <a class="border p-2 rounded" href="{% url 'apply_job' i.id %}" class="text-gray-600 hover:text-gray-800 ">Apply Job</a>
+                
+            </div>
+
+        </div>
+        {% endfor %}
+            
+                
+        
+
+
+    </div>
+
+</div>
+
+<!-- 🛑 Grid Section - Ends Here -->
+{% endblock content %}

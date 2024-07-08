@@ -1,0 +1,23 @@
+<nav class="bg-white shadow p-4">
+    <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center">
+        <a href="{% url 'dashboard' %}" class="text-2xl font-semibold text-gray-800">Job Portal</a>
+        <div class='flex gap-4 justify-between items-center'>
+            {% if request.user.user_type == 'Jobseeker' %}
+            <a href="{% url 'dashboard' %}" class="text-gray-600 hover:text-gray-800">Dashboard</a>
+            <a href="{% url 'job_list' %}" class="text-gray-600 hover:text-gray-800">Jobs</a>
+            <a href="{% url 'profilepage' %}" class="text-gray-600 hover:text-gray-800 ">Profile</a>
+            <a class="border p-2 rounded " href="{% url 'signout' %}" class="text-gray-600 hover:text-gray-800 ">Logout</a>
+            {% elif request.user.user_type == 'Recruiter' %}
+            <a href="{% url 'dashboard' %}" class="text-gray-600 hover:text-gray-800">Dashboard</a>
+            <a href="{% url 'addjobpage' %}" class="text-gray-600 hover:text-gray-800">Add Jobs</a>
+            <a href="{% url 'job_list' %}" class="text-gray-600 hover:text-gray-800">Jobs</a>
+            <a href="{% url 'profilepage' %}" class="text-gray-600 hover:text-gray-800 ">Profile</a>
+            <a class="border p-2 rounded " href="{% url 'signout' %}" class="text-gray-600 hover:text-gray-800 ">Logout</a>
+            {% else %}
+            <a href="{% url 'dashboard' %}" class="text-gray-600 hover:text-gray-800">Dashboard</a>
+            <a href="{% url 'job_list' %}" class="text-gray-600 hover:text-gray-800">Jobs</a>
+            <a class="border p-2 rounded" href="{% url 'signin' %}" class="text-gray-600 hover:text-gray-800 ">SignIn</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

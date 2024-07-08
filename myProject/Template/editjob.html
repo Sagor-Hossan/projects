@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Job Form</title>
+</head>
+<body>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% for i in myjob %}
+      
+      
+    <input type="text" readonly name="id" value="{{i.id}}"  id="">
+    <label for="company_title">Company Title:</label>
+    <input type="text" value="{{i.job_title}}" name="job_title" id="company_title"><br><br>
+
+    <label for="company_description">Company Description:</label>
+    <input type="text" value="{{i.company_description}}" name="company_description" id="company_description"><br><br>
+
+    <label for="company_logo">Company Logo:</label>
+    <img src="/{{i.company_logo}}" alt="">
+    <input type="file"  name="company_logo_new" id="company_logo"><br><br>
+
+    <label for="company_name">Company Name:</label>
+    <input type="text" value="{{i.company_name}}" name="company_name" id="company_name"><br><br>
+
+    <label for="company_location">Company Location:</label>
+    <input type="text" value="{{i.company_location}}" name="company_location" id="company_location"><br><br>
+
+    <label for="qualification">Qualification:</label>
+    <input type="text" value="{{i.qualification}}" name="qualification" id="qualification"><br><br>
+
+    <label for="deadline">Deadline:</label>
+    <input type="text" value="{{i.deadline}}" name="deadline" id="deadline"><br><br>
+
+    <label for="salary">Salary:</label>
+    <input type="text" value="{{i.salary}}" name="salary" id="salary"><br><br>
+
+    <input type="submit" value="Submit">
+    {% endfor %}
+
+  </form>
+</body>
+</html>
+
+{% endblock content %}
+    

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
+            {% include "messages.html" %}
+          <h2 class="text-2xl font-semibold mb-4">Sign In</h2>
+          <form action='' method='post'>
+            {% csrf_token %}
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-medium text-gray-700">Username</label>
+              <input
+                type="text"
+                id="email"
+                name="username"
+                class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200"
+                placeholder="Enter your username"/>
+            </div>
+            <div class="mb-4">
+              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-200"
+                placeholder="Enter your password" />
+            </div>
+            <button
+              type="submit"
+              class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+              Sign In
+            </button>
+          </form>
+          <br>
+          <p class='text-gray-700 '>Didn't have an account? <a class='text-blue-500' href="{% url 'signup' %}">SignUp/Resister</a></p>
+        </div>
+      </div>
+      
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% extends "common/base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="col-xl-6">
+        <div class="form-input-content">
+            <div class="card login-form mb-0">
+                <div class="card-body">
+                   
+                   <h3 class="text-center">Update Profile</h3>
+                   <form class="mt-5 mb-5 login-input" method='post' enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="mr-sm-2">Name</label>
+                            <input type="text" class="form-control" name='name' value="{{user.name}}"  placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                           <label class="mr-sm-2">Username</label>
+                           <input type="text" readonly class="form-control" name='username' value="{{user.username}}"  placeholder="Enter your username" required>
+                        </div>
+                        <div class="form-group">
+                           <label class="mr-sm-2">Email</label>
+                           <input type="email" class="form-control" name='email' value="{{user.email}}"  placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                           <label class="mr-sm-2">Phone Number</label>
+                           <input type="tel" class="form-control" name='phone' value="{{user.phone}}"  placeholder="Enter your phone number" required>
+                        </div>
+                      
+                      <div class="form-group">
+                         <label class="mr-sm-2">Gender</label>
+                         <select class="custom-select mr-sm-2" name='gender'  value="{{user.gender}}" id="inlineFormCustomSelect">
+                            <option selected="selected">Select your gender</option>
+                            <option {% if user.gender == 'male' %} selected {% endif %} value="male">Male</option>
+                            <option {% if user.gender == 'female' %} selected {% endif %} value="female">Female</option>
+                         </select>
+                      </div>
+                      <div class="form-group">
+                         <label class="mr-sm-2">Date of Birth</label>
+                         <input type="date" class="form-control" name='dob'  value="{{ user.dob|date:'Y-m-d' }}" required>
+                      </div>
+                      <div class="form-group">
+                         <label class="mr-sm-2">Height</label>
+                         <input type="number" class="form-control" name='height' value="{{user.height}}" placeholder="Enter your height in cm" required>
+                      </div>
+                      <div class="form-group">
+                         <label class="mr-sm-2">Weight</label>
+                         <input type="number" class="form-control" name='weight' value="{{user.weight}}" placeholder="Enter your weight in kg" required>
+                      </div>
+                      
+                      <div class="form-group">
+                         <label class="mr-sm-2">Profile Picture</label>
+                         <input type="file" name='profile_pic' class="form-control-file">
+                         <input type="hidden" name='profile_pic1'  value="{{user.profile_pic.url}}" class="form-control-file">
+                      </div>
+                      
+                      <div class="form-group">
+                         <label class="mr-sm-2">Goal</label>
+                         <select class="custom-select mr-sm-2" name='goal' value="{{user.goal}}" id="inlineFormCustomSelect">
+                            <option selected="selected">Select a goal</option>
+                            <option {% if user.goal == 'lose_weight' %} selected {% endif %} value="lose_weight">Lose Weight</option>
+                            <option {% if user.goal == 'gain_weight' %} selected {% endif %} value="gain_weight">Gain Weight</option>
+                            <option {% if user.goal == 'maintain_weight' %} selected {% endif %} value="maintain_weight">Maintain Weight</option>
+                         </select>
+                      </div>
+                      
+                      <div class="form-group">
+                         <label class="mr-sm-2">Location</label>
+                         <input type="text" class="form-control" name='location' value="{{user.location}}" placeholder="Enter your location" required>
+                      </div>
+                      <div class="form-group">
+                         <label class="mr-sm-2">About</label>
+                         <textarea name="about" id="" class="form-control border">{{user.about}}"</textarea>
+                      </div>
+                      <button class="btn login-form__btn submit w-100">Update</button>
+                   </form>
+                   
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends 'profile.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile Page</title>
+</head>
+<body>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required><br><br>
+
+    
+
+    <label for="role">Role:</label>
+    <select id="role" name="role" disabled>
+      <option value="recruiter" {% if user.role == 'recruiter' %} selected {% endif %} >Recruiter</option>
+      <option value="job_seeker" {% if user.role == 'job_seeker' %} selected {% endif %}>Job Seeker</option>
+    </select><br><br>
+
+    <label for="city">City:</label>
+    <input type="text" value="{{user.city}}" name="city" id="city" required><br><br>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+      <option value="male" {% if user.gender == 'male' %} selected {% endif %} >Male</option>
+      <option value="female"  {% if user.gender == 'female' %} selected {% endif %} >Female</option>
+      <option value="other"  {% if user.gender == 'other' %} selected {% endif %} >Other</option>
+    </select><br><br>
+
+    <label for="new_profile_picture">Profile Picture:</label>
+    <img src="/{{user.profile_picture}}" width="25%" alt="">
+    <input type="file" value="{{user.}}" name="new_profile_picture" id="new_profile_picture" ><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email"  value="{{user.email}}" name="email" id="email" required><br><br>
+
+    <h2>Basic Information</h2>
+    <label for="father_name">Father's Name:</label>
+    <input type="text"  value="{{user.father_name}}" name="father_name" id="father_name" ><br><br>
+    
+    <label for="mother_name">Mother's Name:</label>
+    <input type="text"  value="{{user.mother_name}}" name="mother_name" id="mother_name" ><br><br>
+    
+    <label for="address">Address:</label>
+    <input type="text"  value="{{user.address}}" name="address" id="address" ><br><br>
+
+    <h2>Contact</h2>
+    <label for="phone">Phone:</label>
+    <input type="text"  value="{{user.phone}}" name="phone" id="phone" ><br><br>
+
+
+    <label for="emergency_contact">Emergency Contact:</label>
+    <input type="text"  value="{{user.emergency_contact}}" name="emergency_contact" id="emergency_contact" ><br><br>
+
+    
+    {% if user.role == 'job_seeker' %}
+
+    <h2>Educational Qualification</h2>
+
+    <label for="education_qualification">Educational Qualification:</label>
+    <input type="text"  value="{{user.SeekerProfileModel.education_qualification}}" name="education_qualification" id="education_qualification" ><br><br>
+
+    <label for="word_experience">Work Experience:</label>
+    <input type="text"  value="{{user.SeekerProfileModel.word_experience}}" name="word_experience" id="phone" ><br><br>
+
+        
+    {% endif %}
+        
+    
+    <input type="submit" value="Save Changes">
+
+  </form>
+</body>
+</html>
+
+{% endblock content %}

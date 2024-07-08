@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>Applicants</title>
+    <div class="text-center p-10">
+        <h1 class="text-3xl">{{job.job_title}}</h1>
+    </div>
+    
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <table class="min-w-full">
+                        <thead class="border-b">
+                            <tr>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">#</th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Username</th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Skills</th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Experience</th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Resume</th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Photo</th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {% for i in applicants %}
+                                <tr class="border-b">
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ i.applicant.username }}</td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ i.skill }}</td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ i.experience }}</td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><a href="{{ i.resume.url }}">Resume</a></td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <img src="{{ i.resume.url }}" alt="" >
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {% if i.status == 'Pending' %}
+                                            <a class="border bg-red-500 text-white p-2 rounded" href="{% url 'applicant_reject' i.id %}">Rejected</a>
+                                            <a class="border bg-red-500 text-white p-2 rounded" href="{% url 'applicant_approved' i.id %}">Approved</a>
+                                            
+                                            {% elif i.status == 'Rejected' %}
+                                            <p class="border bg-red-500 text-center text-white p-2 w-20 rounded">Rejected</p>
+                                            {% else %}
+                                            <p class="border bg-green-500 text-center text-white p-2 w-20 rounded">Approved</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}

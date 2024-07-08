@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    
+<h2>Job List</h2>
+{% include 'message.html' %}
+<table>
+  <tr>
+    <th>Job Title</th>
+    <th>Description</th>
+    <th>Salary</th>
+    <th>Deadline</th>
+    <th>Company Name</th>
+    <th> Actions </th>
+  </tr>
+  
+  {% for  j,already_applid  in data %}
+  
+  <tr>
+    <td> {{j.job_title}} </td>
+    <td> {{j.company_description}} </td>
+    <td> {{j.salary}} </td>
+    <td> {{j.deadline}} </td>  
+    <td> {{j.company_name}} </td>
+    <td>
+        <a href="{% url 'viewjob' j.id %}">View</a>
+
+        {% if user.role == 'job_seeker' %}
+
+        {% if already_applid %}
+          
+
+        <a href="{% url 'applyjob' j.id %}">Apply</a>
+        {% else %}
+        <p>already_applid</p>
+        {% endif %}
+
+        {% endif %}
+
+    </td>
+  </tr>
+
+  {% endfor %}
+
+</table>
+
+{% endblock content %}

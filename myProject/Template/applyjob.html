@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1>Apply for {{myjob.job_title}} </h1>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="skills">Skills:</label>
+    <input type="text" name="skills" id="skills"><br><br>
+
+    <label for="education"> Education:</label>
+    <input type="text" name="education" id="education"><br><br>
+
+    <label for="resume"> Resume:</label>
+    <input type="file" name="resume" id="resume"><br><br>
+
+    <input type="submit" value="Apply">
+
+</form>
+    
+{% endblock content %}
+    

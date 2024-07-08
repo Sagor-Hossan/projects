@@ -1,0 +1,45 @@
+{% extends "common/base.html" %}
+{% block content %}
+<div class="container-fluid mt-3">
+
+    <div class="col-12 m-b-30">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h4 class="d-inline ">Food List</h4>
+                <p class="text-muted">My All Food's With Calorie</p>
+            </div>
+            <a href="{% url 'addFood' %}" class="btn btn-primary">Add Food</a>
+        </div>
+        
+        <div class="row">
+            {% for i in foods %}
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="d-flex justify-content-center py-3">
+                        <img src="{{i.image.url}}" class="card-img-top" alt="Card image" style="height: 100px; width: 150px; object-fit: fill; border-radius: 10%;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{i.food_name}}</h5>
+                        <p class="card-text">Calories: {{i.calories}} cal</p>
+                        <div class="text-center d-flex justify-content-around">
+                            
+                            <a href="{% url 'deleteFood' i.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'editFood' i.id %}" class="btn btn-warning">Edit</a>
+                        </div>
+                    </div>
+                    <div class="text-center pb-3">
+                        <a href="{% url 'addFoodsCalories' i.id %}" class="border py-2 px-3 rounded bg-success text-white">Add</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- End Col -->
+            {% endfor %}
+            
+        </div>
+    </div>
+    
+</div>
+
+{% endblock content %}

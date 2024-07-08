@@ -1,0 +1,46 @@
+{% extends "common/base2.html" %}
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title d-flex justify-content-between align-items-start">
+                <h3>{{user.name}} Restaurant Food List:</h3>
+                <a href="{% url 'restaurantForm' %}" class="btn btn-primary">Add Food</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Food Name</th>
+                            <th>Calories</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for i in dashboardKey %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{i.food_name}}</td>
+                            <td>{{i.calories}}</td>
+                            <td>
+                                <img src="/{{i.image}}" width="50px">
+                            </td>
+                            <td>
+                                <a class="btn mb-1 btn-primary" href="{% url 'viewRestaurantFood' i.id %}">View</a>
+                                <a class="btn mb-1 btn-warning" href="{% url 'editRestaurantFood' i.id %}">Edit</a>
+                                <a class="btn mb-1 btn-danger" href="{% url 'deleteRestaurantFood' i.id %}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                            
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

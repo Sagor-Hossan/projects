@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup Page</title>
+</head>
+<body>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required><br><br>
+
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" name="confirm_password" id="confirm_password" required><br><br>
+
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+      <option value="recruiter">Recruiter</option>
+      <option value="job_seeker">Job Seeker</option>
+    </select><br><br>
+
+    <label for="city">City:</label>
+    <input type="text" name="city" id="city" required><br><br>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select><br><br>
+
+    <label for="profile_picture">Profile Picture:</label>
+    <input type="file" name="profile_picture" id="profile_picture" ><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required><br><br>
+
+    <input type="submit" value="Sign Up">
+    <a href="{% url 'signin' %}">Already have an account</a>
+  </form>
+</body>
+</html>

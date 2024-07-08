@@ -1,0 +1,11 @@
+<table border="1">
+    <tr>
+        <th>Job Title</th>
+    </tr>
+    <tr>
+        {% for i in applied %}
+        <td> {{i.apply_to.job_title}} </td>
+        <td> {{i.apply_to.salary}} </td>
+        {% endfor %}
+    </tr>
+</table>

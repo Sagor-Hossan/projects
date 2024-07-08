@@ -1,0 +1,168 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    ul#imageNames:empty {
+    display: none;
+}
+</style>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-lg-8 col-xl-9">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{% url 'createPost' %}" method='post' class="form-profile" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" name="post" id="textarea" cols="30" rows="2"
+                                placeholder="Post a new message"></textarea>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <ul class="mb-0 form-profile__icons pt-4">
+                                <p class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></p>
+
+                                <label for='fileInput' class="mr-3"><p class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></p></label>
+                                <input type="file" id="fileInput" name="images" style="display: none;" multiple accept="image/*">
+
+                            </ul>
+                            
+                            <button class="btn btn-primary px-3 ml-4">Send</button>
+                        </div>
+                        <ul id="imageNames"></ul>
+                    </form>
+                </div>
+            </div>
+            
+            {% if postLength %}
+            <div class="card">
+                <div class="card-body">
+                    
+                    {% for post in postdata %}
+                        <div class="media media-reply">
+                        <img class="mr-3 circle-rounded" src="{{ post.user.profile_pic.url }}" width="50" height="50"  alt="Generic placeholder image">
+                        <div class="media-body">
+                            <div class="d-sm-flex justify-content-between mb-2">
+                                <h5 class="mb-sm-0">{{ post.user.name }}  <small class="text-muted ml-3"> {{post.time}} {{ post.date }} </small>
+                                </h5>
+                                <div class="media-reply__link">
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                    <button type="button" class="btn btn-transparent text-dark font-weight-bold p-0 ml-2" data-toggle="modal" data-id="{{ post.id }}" data-target="#exampleModalCenter"> Reply </button>
+                                </div>
+                            </div>
+                            <p>{{ post.post }}</p>
+                            <ul>
+                                {% for image in post.postimage_set.all %}
+                                        <img src="{{ image.image.url }}" alt="" style="max-height: 10rem; margin-bottom: 8px; border-radius: 8px; border: 1px solid #ccc;">
+                                {% endfor %}                               
+                            </ul>
+                           
+                            
+                            {% for comment in post.commentsmodel_set.all %}
+                            <div class="media mt-3">
+                                <img class="mr-3 circle-rounded circle-rounded" src="{{ comment.user.profile_pic.url }}" width="50"
+                                    height="50" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0">{{ comment.user.name }} <small class="text-muted ml-3"> on {{ comment.date }} {{ comment.time }}</small></h5>
+                                        
+                                    </div>
+                                    <p>{{comment.comment}}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                            <div class="border">
+                                <div class="card-body">
+                                    <form action="{% url 'comments' %}" method='post' class="form-profile" >
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type='hidden' name="id" id='id' value="{{post.id}}">
+                                            <textarea class="form-control" name="comment" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary px-3 ">Send</button>
+                                        
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        
+                    </div>
+ 
+                    {% endfor %}
+        
+                </div>
+            </div> 
+
+            {% else %} 
+
+            <div class="card">
+                <div class="card-body">
+                    <h1>No Post Available</h1>
+                </div>
+            </div>   
+            {% endif %}
+                
+        </div>
+
+        
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method='post' action="{% url 'comments' %}">
+      <div class="modal-body">
+            <input type='hidden' name="id" id='commentid'>
+            <div class="form-group">
+                <textarea class="form-control" name="comment" id="textarea" cols="30" rows="2"  placeholder="Post a new message"></textarea>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+<script>
+    $(document).ready(function(){
+        $("#fileInput").on("change", function(e){
+            let fileList = e.target.files;
+            $(fileList).each(function(i){
+                let imgList = `<li>${fileList[i].name}</li>`;
+                $("#imageNames").append(imgList);
+            });
+        }); 
+        
+        $(".media-reply__link button").on("click", function(){
+            $('#commentid').val($(this).attr("data-id"))
+        });
+    });
+</script>
+
+
+
+{% endblock content %}
+
+
+
+
+
+

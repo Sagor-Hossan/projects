@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1"> 
+    <!-- theme meta -->
+    <meta name="theme-name" content="quixlab" />
+    <title>Fitness Tracker</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <!-- Pignose Calender -->
+    <link href="{% static './plugins/pg-calendar/css/pignose.calendar.min.css' %}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="{% static './plugins/chartist/css/chartist.min.css' %}">
+    <link rel="stylesheet" href="{% static './plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' %}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+ 
+
+    
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        {% include 'common/navbar2.html' %}
+
+ 
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        {% include 'common/sidebar2.html' %}
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+         <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+        <!--**********************************
+            Content body end
+            ***********************************-->
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy;  by <a href="{% url 'home' %}">Recipe Viewer</a> 2024</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+
+    <!-- Include Chart.js -->
+   
+        
+
+    <script src="{% static 'plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <script src="{% static 'js/settings.js' %}"></script>
+    <script src="{% static 'js/gleek.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+    <!-- Chartjs -->
+    <script src="{% static './plugins/chart.js/Chart.bundle.min.js' %}"></script>
+    <!-- Circle progress -->
+    <script src="{% static './plugins/circle-progress/circle-progress.min.js' %}"></script>
+    <!-- Datamap -->
+    <script src="{% static './plugins/d3v3/index.js' %}"></script>
+    <script src="{% static './plugins/topojson/topojson.min.js' %}"></script>
+    <script src="{% static './plugins/datamaps/datamaps.world.min.js' %}"></script>
+    <!-- Morrisjs -->
+    <script src="{% static './plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static './plugins/morris/morris.min.js' %}"></script>
+    <!-- Pignose Calender -->
+    <script src="{% static './plugins/moment/moment.min.js' %}"></script>
+    <script src="{% static './plugins/pg-calendar/js/pignose.calendar.min.js' %}"></script>
+    <!-- ChartistJS -->
+    <script src="{% static './plugins/chartist/js/chartist.min.js' %}"></script>
+    <script src="{% static './plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static './js/dashboard/dashboard-1.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <img src="/{{user.profile_picture}}" width="25%" alt="">
+    <br> <br>
+
+
+
+
+<button>
+    <a href="{% url 'resumeprofile' %}"> Profile Details</a>
+</button>
+
+{% if user.role == 'recruiter' %}
+<button>
+    <a href="{% url 'postedjob' %}">Posted Job</a>
+</button>
+
+{% elif user.role == 'job_seeker' %}
+
+<button>
+    <a href="{% url 'appliedjob' %}">Applied Job</a>
+</button>
+
+    
+{% endif %}
+    
+<button>
+    <a href="{% url 'editprofile' %}">Edit Profile</a>
+</button>
+
+<button>
+    <a href="{% url 'changepassword' %}">Change Password</a>
+</button>
+
+
+{% block profile %}
+    
+{% endblock profile %}
+    
+    
+{% endblock content %}

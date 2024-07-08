@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Job Details</h1>
+    
+
+        
+        <img src="/{{job.company_logo}}" width="25%" alt="">
+    <h3>Job Title:  </h3>{{job.job_title}}
+    <h3>company_description:  </h3>{{job.company_description}} 
+    <h3>company_name: </h3>{{job.company_name}}  
+    <h3>company_location:   </h3>{{job.company_location}}
+    <h3>qualification: </h3> {{job.qualification}} 
+    <h3>deadline:  </h3>{{job.deadline}} 
+    <h3>salary: </h3> {{job.salary}} 
+
+
+{% endblock content %}

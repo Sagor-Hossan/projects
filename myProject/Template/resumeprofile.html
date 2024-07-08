@@ -1,0 +1,31 @@
+{% extends 'profile.html' %}
+
+{% block profile %}
+<br><br><br>
+<b>username:</b> {{user.username}}<br>
+<b>role:</b> {{user.role}}<br>
+
+<h2>Basic_Information</h2>
+<b>Father's Name:</b> {{user.father_name}} <br>
+<b>Mother's Name:</b> {{user.mother_name}} <br>
+<b>address:</b> {{user.address}}
+
+<h2>Contact Information</h2>
+<b>email:</b> {{user.email}}<br>
+<b>phone:</b> {{user.phone}}<br>
+<b>emergency_contact:</b> {{user.emergency_contact}}<br>
+
+
+{% if user.role == 'job_seeker' %}
+<h2>Qualification</h2>
+<b>Educational Qualification:</b> {{user.SeekerProfileModel.education_qualification}}<br>
+
+<h2>Experience</h2>
+<b>Work Experience:</b> {{user.SeekerProfileModel.word_experience}}<br>
+    
+{% endif %}
+    
+
+
+
+{% endblock profile %}

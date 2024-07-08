@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <div class="px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img class="h-16 w-16 rounded-full object-cover mr-4" src="{{user.profile_pic.url}}" alt="User Avatar">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">{{user.first_name}} {{user.last_name}}</h1>
+                        
+                    </div>
+                </div>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none">Update</button>
+            </div>
+            <div class="mt-4">
+                <h2 class="text-lg font-semibold text-gray-800">Contact Information</h2>
+                <div class="mt-2">
+                    <p class="text-gray-700"><span class="font-semibold">Email:</span> {{user.email}}</p>
+                    <p class="text-gray-700"><span class="font-semibold">Phone:</span> +1234567890</p>
+                    <p class="text-gray-700"><span class="font-semibold">Location:</span> New York, USA</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-100 px-4 gap-4 py-3 flex flex-wrap items-center ">
+            <a class="border p-2 rounded" href="{% url 'changepassword' %}" class="text-gray-600 hover:text-gray-800 ">Change Password</a>
+            {% if request.user.user_type == 'Jobseeker' %}
+            <a class="border p-2 rounded" href="{% url 'applyedjobpage' %}" class="text-gray-600 hover:text-gray-800 ">Applyed Jobs</a>
+            {% endif %}
+        </div>
+        {% block data %}
+        
+        {% endblock data %}
+        
+    </div>
+</div>
+{% endblock content %}
